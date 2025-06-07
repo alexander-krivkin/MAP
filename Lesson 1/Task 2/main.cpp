@@ -15,7 +15,7 @@ std::vector<int> v1_4(1'000'000), v2_4(1'000'000), v3_4(1'000'000);
 void generateVectors(std::vector<int>& v1, std::vector<int>& v2)
 {
 	std::mt19937 gen;
-	std::uniform_int_distribution<int> dis(0, 1'000);
+	std::uniform_int_distribution<int> dis(0, 1'000'000);
 	auto randNum([=]() mutable {return dis(gen); });
 
 	std::generate(v1.begin(), v1.end(), randNum);
@@ -67,7 +67,7 @@ auto sumVectorsPar(int numThreads, std::vector<int>& v1, std::vector<int>& v2, s
 	auto end = std::chrono::steady_clock::now();
 	auto elapsed = end - start;
 
-	return std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+	return std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 }
 
 
@@ -83,35 +83,35 @@ int main()
 	std::cout << std::setw(26) << "1'000" << std::setw(16) << "10'000" <<
 		std::setw(15) << "100'000" << std::setw(15) << "1'000'000" << std::endl << std::endl;
 
-	std::cout << "1 thread:  " << std::setw(12) << sumVectorsPar(1, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(1, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(1, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(1, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "1 thread:  " << std::setw(12) << sumVectorsPar(1, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(1, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(1, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(1, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
-	std::cout << "2 threads: " << std::setw(12) << sumVectorsPar(2, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(2, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(2, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(2, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "2 threads: " << std::setw(12) << sumVectorsPar(2, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(2, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(2, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(2, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
-	std::cout << "4 threads: " << std::setw(12) << sumVectorsPar(4, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(4, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(4, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(4, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "4 threads: " << std::setw(12) << sumVectorsPar(4, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(4, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(4, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(4, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
-	std::cout << "8 threads: " << std::setw(12) << sumVectorsPar(8, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(8, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(8, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(8, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "8 threads: " << std::setw(12) << sumVectorsPar(8, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(8, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(8, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(8, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
-	std::cout << "16 threads: " << std::setw(11) << sumVectorsPar(16, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(16, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(16, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(16, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "16 threads: " << std::setw(11) << sumVectorsPar(16, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(16, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(16, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(16, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
-	std::cout << "24 threads: " << std::setw(11) << sumVectorsPar(24, v1_1, v2_1, v3_1) << " ms" <<
-		std::setw(12) << sumVectorsPar(24, v1_2, v2_2, v3_2) << " ms" <<
-		std::setw(12) << sumVectorsPar(24, v1_3, v2_3, v3_3) << " ms" <<
-		std::setw(12) << sumVectorsPar(24, v1_4, v2_4, v3_4) << " ms" << std::endl;
+	std::cout << "24 threads: " << std::setw(11) << sumVectorsPar(24, v1_1, v2_1, v3_1) << " mcs" <<
+		std::setw(12) << sumVectorsPar(24, v1_2, v2_2, v3_2) << " mcs" <<
+		std::setw(12) << sumVectorsPar(24, v1_3, v2_3, v3_3) << " mcs" <<
+		std::setw(12) << sumVectorsPar(24, v1_4, v2_4, v3_4) << " mcs" << std::endl;
 
 	std::cout << std::endl;
 
