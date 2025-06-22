@@ -13,14 +13,14 @@ int main()
 {
 	TcpServer tcpServer{};
 
-	std::thread thr0(&TcpServer::run, tcpServer);
+	std::thread thr0(&TcpServer::run, &tcpServer);
 
 	TcpClient tcpClients[numClients]{};
 	std::thread thr[numClients]{};
 
 	for (int idx{0}; idx < numClients; idx++)
 	{
-		thr[idx] = std::thread(&TcpClient::connectAndSendMessage, tcpClients[idx], idx);
+		thr[idx] = std::thread(&TcpClient::connectAndSendMessage, &tcpClients[idx], idx);
 	}
 	for (int idx{ 0 }; idx < numClients; idx++)
 	{
